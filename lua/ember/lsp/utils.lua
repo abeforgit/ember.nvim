@@ -56,7 +56,7 @@ local function is_glint_project(bufnr, onDir)
     return nil
   end
 
-  if (not result.isGlintV2) then
+  if (result.isGlintV2) then
     return nil
   end
 
