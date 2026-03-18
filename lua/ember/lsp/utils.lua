@@ -12,7 +12,7 @@ local function readFile(filePath)
   return contents;
 end
 
-local function read_nearest_ts_config(fromFile)
+local function read_nearest_ts_config()
   local rootDir = vim.fs.root(0, { 'tsconfig.json' })
 
   if not rootDir then
@@ -49,14 +49,14 @@ end
 -- See:
 -- :help lspconfig
 -- search for ROOT DIRECTORY DETECTION
-local function is_glint_project(filename, bufnr)
-  local result = read_nearest_ts_config(filename)
+local function is_glint_project(bufnr, onDir)
+  local result = read_nearest_ts_config()
 
   if not result then
     return nil
   end
 
-  if (not result.isGlintV2) then
+  if (result.isGlintV2) then
     return nil
   end
 
@@ -64,11 +64,11 @@ local function is_glint_project(filename, bufnr)
     return nil
   end
 
-  return result.rootDir
+  onDir(result.rootDir)
 end
 
-local function is_ts_project(filename, onDir)
-  local result = read_nearest_ts_config(filename)
+local function is_ts_project(bufnr, onDir)
+  local result = read_nearest_ts_config()
 
   if not result then
     return nil
