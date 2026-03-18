@@ -64,7 +64,7 @@ local function is_glint_project(bufnr, onDir)
     return nil
   end
 
-  return result.rootDir
+  onDir(result.rootDir)
 end
 
 local function is_ts_project(bufnr, onDir)
