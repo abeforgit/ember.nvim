@@ -49,7 +49,7 @@ end
 -- See:
 -- :help lspconfig
 -- search for ROOT DIRECTORY DETECTION
-local function is_glint_project(filename, bufnr)
+local function is_glint_project(bufnr, onDir)
   local result = read_nearest_ts_config()
 
   if not result then
@@ -67,7 +67,7 @@ local function is_glint_project(filename, bufnr)
   return result.rootDir
 end
 
-local function is_ts_project(filename, onDir)
+local function is_ts_project(bufnr, onDir)
   local result = read_nearest_ts_config()
 
   if not result then
