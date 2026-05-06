@@ -36,8 +36,7 @@ local function read_nearest_ts_config()
   --   this does not follow "extends" or global tsconfigs if a "one tsconfig.json"
   --   is used.
   local isGlintV1 = string.find(contents, '"glint"')
-  -- NOTE: hyphens don't work here
-  local hasGlintPlugin = string.find(manifest, "@glint/tsserver")
+  local hasGlintPlugin = string.find(manifest, "@glint/ember%-tsc")
 
   return {
     isGlintV1 = not not isGlintV1,
