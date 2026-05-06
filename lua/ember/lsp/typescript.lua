@@ -1,6 +1,14 @@
 local utils = require('ember.lsp.utils')
 
-local filetypes = {
+local tsFiletypes = {
+  'typescript',
+  'javascript',
+  'typescript.glimmer',
+  'javascript.glimmer',
+  'typescript.tsx',
+  'javascript.jsx',
+}
+local allFiletypes = {
   'typescript',
   'javascript',
   'typescript.glimmer',
@@ -35,11 +43,11 @@ vim.lsp.config('ts_ls', {
       {
         name = "@glint/tsserver-plugin",
         location = "/your/path/to/@glint/tsserver-plugin",
-        languages = filetypes
+        languages = tsFiletypes
       },
     },
   },
-  filetypes = filetypes,
+  filetypes = tsFiletypes,
   on_new_config = function(new_config, new_root_dir)
     local info = utils.read_nearest_ts_config(new_root_dir)
     local glintPlugin = new_root_dir .. "node_modules/@glint/tsserver-plugin"
@@ -50,7 +58,7 @@ vim.lsp.config('ts_ls', {
           {
             name = "@glint/tsserver-plugin",
             location = glintPlugin,
-            languages = filetypes,
+            languages = tsFiletypes,
             enableForWorkspaceTypeScriptVersions = true,
             configNamespace = "typescript"
           }
@@ -63,6 +71,7 @@ vim.lsp.config('ts_ls', {
 
 vim.lsp.config('glint', {
   root_dir = utils.is_glint_v1_project,
+  filetypes = allFiletypes,
 })
 
 vim.lsp.enable('ts_ls')
